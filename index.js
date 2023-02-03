@@ -3,6 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const router = require('./routers/Router,')
 require('dotenv').config()
+const cors = require('cors')
 
 const app = express()
 const PORT = process.env.PORT || 5000
@@ -15,6 +16,7 @@ mongoose.connect(process.env.URI)
         console.log('Error in MongoDB Connection');
     })
 
+app.use(cors())
 app.use(express.json())
 app.use('/api', router)
 
