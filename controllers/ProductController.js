@@ -1,7 +1,7 @@
 const productModel = require("../models/ProductSchema")
 
 const productController = {
-    products: (req, res) => {
+    createProducts: (req, res) => {
         const { title, description, price, category, image } = req.body
 
         if (!title || !description || !price || !category || !image) {
@@ -24,9 +24,22 @@ const productController = {
                 })
             }
         })
+    },
 
-
-
-    }
+    getProducts: (req, res) => {
+        productModel.find({}, (err, products) => {
+            if (err) {
+                res.status(500).json({
+                    message: 'Something went wrong'
+                })
+            }
+            else {
+                res.status(200).json({
+                    message: 'Get Products',
+                    products
+                })
+            }
+        })
+    },
 }
 module.exports = productController
