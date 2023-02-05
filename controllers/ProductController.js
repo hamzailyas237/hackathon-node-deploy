@@ -41,5 +41,38 @@ const productController = {
             }
         })
     },
+
+    updateProducts: (req, res) => {
+        productModel.findByIdAndUpdate(req.body.id, req.body, { new: true }, (err, updatedProduct) => {
+            if (err) {
+                res.status(500).json({
+                    message: 'Something went wrong'
+                })
+            }
+            else {
+                res.status(200).json({
+                    message: 'Product Updated Successfully',
+                    updatedProduct
+                })
+            }
+        })
+    },
+
+    deleteProducts: (req, res) => {
+        productModel.findByIdAndDelete(req.params.id, (err, deletedProduct) => {
+            console.log(req.params.id);
+            if (err) {
+                res.status(500).json({
+                    message: 'Something went wrong'
+                })
+            }
+            else {
+                res.status(200).json({
+                    message: 'Product deleted',
+                    deletedProduct
+                })
+            }
+        })
+    }
 }
 module.exports = productController
