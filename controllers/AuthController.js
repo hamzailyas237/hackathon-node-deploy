@@ -39,7 +39,6 @@ const authControllers = {
                             })
                         }
                         else {
-                            console.log(signedUpUser);
                             res.status(200).json({
                                 message: 'user created successfully',
                                 user: signedUpUser
