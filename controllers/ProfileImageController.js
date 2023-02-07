@@ -14,24 +14,54 @@ const userProfileImageController = {
             return
         }
 
-        userProfileModel.create(req.body, (err, profile_data) => {
+
+        userProfileModel.findOne({ user_id }, (err, profile_data) => {
             if (err) {
                 res.status(500).json({
                     message: 'Something went wrong'
                 })
             }
             else {
-                res.status(200).json({
-                    message: 'Profile image uploaded successfully',
-                    profile_data
-                })
+                console.log(profile_data._id);
+                if (profile_data) {
+                    userProfileModel.findByIdAndUpdate(profile_data._id, req.body, { new: true }, (err, updated_image) => {
+                        if (err) {
+                            res.status(500).json({
+                                message: 'Something went wrong'
+                            })
+                        }
+                        else {
+                            console.log('updated_image', updated_image);
+                            res.status(200).json({
+                                message: 'Profile image updated successfully',
+                                updated_image
+                            })
+                        }
+                    })
+                }
+                else {
+                    userProfileModel.create(req.body, (err, profile_data) => {
+                        if (err) {
+                            res.status(500).json({
+                                message: 'Something went wrong'
+                            })
+                        }
+                        else {
+                            res.status(200).json({
+                                message: 'Profile image uploaded successfully',
+                                profile_data
+                            })
+                        }
+                    })
+                }
             }
         })
+
     },
 
     getUserProfileImage: (req, res) => {
-        const { id } = req.params
-        userProfileModel.findById(id, (err, profile_data) => {
+        const { user_id } = req.params
+        userProfileModel.findOne({ user_id }, (err, profile_data) => {
             if (err) {
                 res.status(500).json({
                     message: 'Something went wrong'

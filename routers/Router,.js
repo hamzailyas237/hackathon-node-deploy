@@ -14,7 +14,7 @@ router.get('/products', getProducts)
 router.put('/products', authMiddleware, updateProducts)
 router.delete('/products/:id', authMiddleware, deleteProducts)
 router.post('/profile', authMiddleware, uploadProfileImage)
-router.get('/profile/:id', getUserProfileImage)
+router.get('/profile/:user_id', getUserProfileImage)
 router.get('/user/:id', loggedInUser)
 
 module.exports = router
