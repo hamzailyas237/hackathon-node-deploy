@@ -18,6 +18,6 @@ router.get('/profile/:user_id', getUserProfileImage)
 router.get('/user/:id', loggedInUser)
 router.post('/wishlist', authMiddleware, addToWishlist)
 router.get('/wishlist/:user_id', getWishlistProducts)
-router.delete('/wishlist', removeFromWishlist)
+router.delete('/wishlist/:id', removeFromWishlist)
 
 module.exports = router
