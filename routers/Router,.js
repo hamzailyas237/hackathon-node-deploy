@@ -2,8 +2,8 @@
 
 const router = require('express').Router()
 const { signup, login } = require('../controllers/AuthController')
-const { createProducts, getProducts, updateProducts, deleteProducts } = require('../controllers/ProductController')
-const { uploadProfileImage, getUserProfileImage,loggedInUser } = require('../controllers/ProfileImageController')
+const { createProducts, getProducts, updateProducts, deleteProducts, addToWishlist, getWishlistProducts } = require('../controllers/ProductController')
+const { uploadProfileImage, getUserProfileImage, loggedInUser } = require('../controllers/ProfileImageController')
 const { authMiddleware } = require('../middlewares/AuthMiddleware')
 
 
@@ -16,5 +16,7 @@ router.delete('/products/:id', authMiddleware, deleteProducts)
 router.post('/profile', authMiddleware, uploadProfileImage)
 router.get('/profile/:user_id', getUserProfileImage)
 router.get('/user/:id', loggedInUser)
+router.post('/wishlist', authMiddleware, addToWishlist)
+router.get('/wishlist/:user_id', getWishlistProducts)
 
 module.exports = router

@@ -40,7 +40,7 @@ const authControllers = {
                         }
                         else {
                             res.status(200).json({
-                                message: 'user created successfully',
+                                message: 'User signed up successfully',
                                 user: signedUpUser
                             })
                         }
@@ -73,7 +73,7 @@ const authControllers = {
                     if (isPasswordMatch) {
                         const token = jwt.sign({ searchedUser }, process.env.JWT_KEY)
                         res.status(200).json({
-                            message: 'user logged in',
+                            message: 'User logged in',
                             user: searchedUser,
                             token
                         })
