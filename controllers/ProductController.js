@@ -158,7 +158,25 @@ const productController = {
                 }
             }
         })
+    },
+
+    removeFromWishlist: (req, res) => {
+        const _id = req.body._id
+        wishlistModel.findByIdAndDelete(_id , (err, deleted_product) => {
+            if (err) {
+                res.status(500).json({
+                    message: 'Something went wrong'
+                })
+            }
+            else {
+                res.status(200).json({
+                    message: 'Product deleted',
+                    deleted_product
+                })
+            }
+        })
     }
+
 
 
 }
