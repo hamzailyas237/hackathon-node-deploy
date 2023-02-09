@@ -220,17 +220,26 @@ const productController = {
     },
 
     getCartProducts: (req, res) => {
-        cartModel.find({}, (err, product) => {
+        const { user_id } = req.params
+        console.log(user_id);
+        cartModel.find({ user_id }, (err, data) => {
             if (err) {
                 res.status(500).json({
                     message: 'Something went wrong'
                 })
             }
             else {
-                res.status(200).json({
-                    message: 'Get cart product',
-                    product
-                })
+                if (data) {
+                    res.status(200).json({
+                        message: 'Get cart product',
+                        cart_products: data
+                    })
+                }
+                else {
+                    res.status(500).json({
+                        message: 'Something went wrong'
+                    })
+                }
             }
         })
     },

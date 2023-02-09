@@ -21,6 +21,6 @@ router.get('/wishlist/:user_id', authMiddleware, getWishlistProducts)
 router.delete('/wishlist/:id', removeFromWishlist)
 router.post('/cart', authMiddleware, addToCart)
 router.delete('/cart/:id', authMiddleware, removeFromCart)
-router.get('/cart', authMiddleware, getCartProducts)
+router.get('/cart/:user_id', authMiddleware, getCartProducts)
 
 module.exports = router
