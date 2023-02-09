@@ -218,5 +218,21 @@ const productController = {
             }
         })
     },
+
+    getCartProducts: (req, res) => {
+        cartModel.find({}, (err, product) => {
+            if (err) {
+                res.status(500).json({
+                    message: 'Something went wrong'
+                })
+            }
+            else {
+                res.status(200).json({
+                    message: 'Get cart product',
+                    product
+                })
+            }
+        })
+    },
 }
 module.exports = productController
