@@ -1,4 +1,5 @@
 const { mongoose } = require("mongoose")
+const cartModel = require("../models/CartSchema")
 const productModel = require("../models/ProductSchema")
 const wishlistModel = require("../models/WishlistSchema")
 
@@ -169,14 +170,53 @@ const productController = {
             }
             else {
                 res.status(200).json({
-                    message: 'Product deleted',
+                    message: 'Product removed from wishlist',
                     deleted_product
                 })
             }
         })
-    }
+    },
 
+    addToCart: (req, res) => {
+        const { product } = req.body
+        // mongoose.Types.ObjectId(id)
 
+        cartModel.create(req.body, (err, product) => {
+            if (err) {
+                res.status(500).json({
+                    message: 'Something went wrong'
+                })
+            }
+            else {
+                if (product) {
+                    res.status(200).json({
+                        message: 'Product added to cart',
+                        product
+                    })
+                }
+                else {
+                    res.status(500).json({
+                        message: 'Something went wrong'
+                    })
+                }
+            }
+        })
+    },
 
+    removeFromCart: (req, res) => {
+        cartModel.findByIdAndDelete(req.params.id, (err, deleted_product) => {
+            if (err) {
+                res.status(500).json({
+                    message: 'Something went wrong'
+                })
+            }
+            else {
+                res.status(200).json({
+                    message: 'Product removed from cart',
+                    deleted_product
+                })
+            }
+        })
+    },
 }
 module.exports = productController
