@@ -4,7 +4,7 @@ const router = require('express').Router()
 const { signup, login } = require('../controllers/AuthController')
 const { createProducts, getProducts, updateProducts, deleteProducts, addToWishlist, getWishlistProducts, removeFromWishlist, addToCart, removeFromCart, getCartProducts } = require('../controllers/ProductController')
 const { uploadProfileImage, getUserProfileImage, loggedInUser } = require('../controllers/ProfileImageController')
-const { emergencyRequest } = require('../controllers/RequestController')
+const { createEmergencyRequest, getEmergencyRequest } = require('../controllers/RequestController')
 const { authMiddleware } = require('../middlewares/AuthMiddleware')
 
 
@@ -24,7 +24,8 @@ router.post('/cart', authMiddleware, addToCart)
 router.delete('/cart/:id', authMiddleware, removeFromCart)
 router.get('/cart/:user_id', authMiddleware, getCartProducts)
 
-router.post('/request', authMiddleware, emergencyRequest)
+router.post('/request', authMiddleware, createEmergencyRequest)
+router.get('/request', authMiddleware, getEmergencyRequest)
 
 
 
