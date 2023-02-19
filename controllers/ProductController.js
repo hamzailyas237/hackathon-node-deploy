@@ -221,7 +221,6 @@ const productController = {
 
     getCartProducts: (req, res) => {
         const { user_id } = req.params
-        console.log(user_id);
         cartModel.find({ user_id }, (err, data) => {
             if (err) {
                 res.status(500).json({
