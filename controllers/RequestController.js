@@ -40,6 +40,21 @@ const requestController = {
                 })
             }
         })
-    }
+    },
+    removeRequest: (req, res) => {
+        requestModel.findByIdAndDelete(req.params.id, (err, request) => {
+            if (err) {
+                res.status(500).json({
+                    message: 'Something went wrong'
+                })
+            }
+            else {
+                res.status(200).json({
+                    message: 'Request removed from Panel',
+                    request
+                })
+            }
+        })
+    },
 }
 module.exports = requestController
