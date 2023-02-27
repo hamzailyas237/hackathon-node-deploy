@@ -6,7 +6,6 @@ const userProfileImageController = {
     uploadProfileImage: (req, res) => {
 
         const { image, user_id } = req.body
-
         if (!user_id || !image) {
             res.status(400).json({
                 message: 'Required fields are missing'
@@ -17,12 +16,12 @@ const userProfileImageController = {
 
         userProfileModel.findOne({ user_id }, (err, profile_data) => {
             if (err) {
+                console.log('err', err);
                 res.status(500).json({
                     message: 'Something went wrong'
                 })
             }
             else {
-                console.log(profile_data._id);
                 if (profile_data) {
                     userProfileModel.findByIdAndUpdate(profile_data._id, req.body, { new: true }, (err, updated_image) => {
                         if (err) {
