@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const authControllers = {
     signup: async (req, res) => {
         const { name, email, phone ,role, password } = req.body
-        if (!name || !email || !phone || !password) {
+        if (!name || !email || !phone || !role || !password) {
             res.status(400).json({
                 message: 'Required fields are missing'
             })
